@@ -15,7 +15,6 @@ print(df.head(10))
 print("\n--- TYPE breakdown ---")
 type_counts = df["TYPE"].value_counts(dropna=False)
 print(type_counts)
-type_counts.to_csv("type_breakdown.csv")
 
 print("Missing P0:", df["P0"].isna().sum())
 print("Missing P1:", df["P1"].isna().sum())
