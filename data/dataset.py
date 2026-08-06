@@ -6,9 +6,9 @@ query = QueryATNF(params=["PSRJ", "P0", "P1", "DIST", "TYPE"])
 df = query.pandas
 
 conditions = [pd.isna(df["P1"]), df["TYPE"] == "AXP", df["P0"] <= 0.03]
-choices = ["Insufficient Data", "Magnetars", "Millisecond Pulsar"]
+choices = ["Insufficient Data", "Magnetars", "Millisecond Pulsars"]
 
-df["classification"] = np.select(conditions, choices, default="Ordinary Pulsar")
+df["classification"] = np.select(conditions, choices, default="Ordinary Pulsars")
 
 filtered_df = df[df["classification"] != "Insufficient Data"]
 
