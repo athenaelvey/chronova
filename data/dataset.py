@@ -15,4 +15,4 @@ filtered_df = df[df["classification"] != "Insufficient Data"]
 display_df = filtered_df.groupby('classification').sample(n=10)
 print(display_df["classification"].value_counts())
 
-display_df.to_json("../frontend/src/displaydata/pulsars.json", orient="records", indent=2)
+display_df.to_json("../frontend/src/displaydata/pulsars.json", orient="records", indent=2, double_precision=15)
