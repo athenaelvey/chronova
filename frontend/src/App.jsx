@@ -4,6 +4,7 @@ import viteLogo from './assets/vite.svg'
 import heroImg from './assets/hero.png'
 import './App.css'
 import PPDiagram from './PPDiagram'
+import CatalogTable from './CatalogTable'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -24,6 +25,7 @@ function App() {
           </p>
         </div>
         <PPDiagram /> 
+        <CatalogTable />
         <button
           type="button"
           className="counter"

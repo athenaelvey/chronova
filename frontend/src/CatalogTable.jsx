@@ -5,5 +5,39 @@ function CatalogTable(){
     const [currClass, setClass] = useState("All");
     const [currRow, setRow] = useState(null);
 
-    const tableArray = pulsars.filter(item => item.classification === currClass || currClass === "All")
+    const tableArray = pulsars.filter(item => item.classification === currClass || currClass === "All");
+
+    return(
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Classification</th>
+                        <th>Period (s)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {tableArray.map(pulsar =>(
+                        <tr key={pulsar.PSRJ} onClick={() => setRow(pulsar)}>
+                            <td>{pulsar.PSRJ}</td>
+                            <td>{pulsar.classification}</td>
+                            <td>{pulsar.P0}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+            <select onChange={(e) => setClass(e.target.value)}>
+                <option value="All">All</option>
+                <option value="Magnetars">Magnetars</option>
+                <option value="Millisecond Pulsars">Millisecond Pulsars</option>
+                <option value="Ordinary Pulsars">Ordinary Pulsars</option>
+
+            </select>
+            
+        </div>
+    )
+    
 }
+
+export default CatalogTable
