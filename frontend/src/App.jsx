@@ -5,9 +5,12 @@ import heroImg from './assets/hero.png'
 import './App.css'
 import PPDiagram from './PPDiagram'
 import CatalogTable from './CatalogTable'
+import DetailPanel from './DetailPanel'
 
 function App() {
   const [count, setCount] = useState(0)
+  const [currClass, setClass] = useState("All")
+  const [currRow, setRow] = useState(null)
 
   return (
     <>
@@ -25,7 +28,13 @@ function App() {
           </p>
         </div>
         <PPDiagram /> 
-        <CatalogTable />
+        <CatalogTable 
+          currClass={currClass} 
+          setClass={setClass} 
+          currRow={currRow} 
+          setRow={setRow} 
+        />
+        <DetailPanel currRow={currRow}/>
         <button
           type="button"
           className="counter"
