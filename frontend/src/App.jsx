@@ -6,6 +6,7 @@ import './App.css'
 import PPDiagram from './PPDiagram'
 import CatalogTable from './CatalogTable'
 import DetailPanel from './DetailPanel'
+import ComparisonPanel from './ComparisonPanel'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -35,6 +36,7 @@ function App() {
           setRow={setRow} 
         />
         <DetailPanel currRow={currRow}/>
+        <ComparisonPanel />
         <button
           type="button"
           className="counter"
