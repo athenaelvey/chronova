@@ -23,3 +23,7 @@ function helper(P1){
         return 'contaminated';
     return 'ok';
 }
+
+export function deathLinePdot(P0) {
+    return 2.82e-17 * Math.pow(P0, 3);
+}
