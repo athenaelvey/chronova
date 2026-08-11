@@ -2,7 +2,9 @@ import ComparisonPanel from './ComparisonPanel'
 
 function ComparePage(){
     return(
-        <ComparisonPanel />
+        <div className="compare-container">
+            <ComparisonPanel />
+        </div>
     )
 }
 

@@ -1,11 +1,18 @@
 import pulsars from './displaydata/pulsars.json'
+import './CatalogTable.css'
 
 function CatalogTable({ currClass, setClass, currRow, setRow }){
 
     const tableArray = pulsars.filter(item => item.classification === currClass || currClass === "All");
 
     return(
-        <div>
+        <div className="catalog-container">
+            <select className="catalog-select" onChange={(e) => setClass(e.target.value)}>
+                <option value="All">All</option>
+                <option value="Magnetars">Magnetars</option>
+                <option value="Millisecond Pulsars">Millisecond Pulsars</option>
+                <option value="Ordinary Pulsars">Ordinary Pulsars</option>
+            </select>
             <table>
                 <thead>
                     <tr>
@@ -24,17 +31,8 @@ function CatalogTable({ currClass, setClass, currRow, setRow }){
                     ))}
                 </tbody>
             </table>
-            <select onChange={(e) => setClass(e.target.value)}>
-                <option value="All">All</option>
-                <option value="Magnetars">Magnetars</option>
-                <option value="Millisecond Pulsars">Millisecond Pulsars</option>
-                <option value="Ordinary Pulsars">Ordinary Pulsars</option>
-
-            </select>
-            
         </div>
     )
-    
 }
 
 export default CatalogTable

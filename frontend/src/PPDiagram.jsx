@@ -54,19 +54,31 @@ const deathLineTrace = {
   name: 'Death Line'
 }
 
-const layout = {
-    xaxis: {
-        title: 'Period (s)',
-        type: 'log'
-    },
-    yaxis: {
-        title: 'Period Derivative',
-        type: 'log'
-    },
-    title: 'P-Ṗ Diagram'
+function PPDiagram(){
+    const rootStyles = getComputedStyle(document.documentElement);
+    const bg = rootStyles.getPropertyValue('--bg').trim();
+    const textColor = rootStyles.getPropertyValue('--text-h').trim();
+    const gridColor = rootStyles.getPropertyValue('--border').trim();
+
+    const layout = {
+        paper_bgcolor: bg,
+        plot_bgcolor: bg,
+        font: { color: textColor },
+        xaxis: {
+            title: 'Period (s)',
+            type: 'log',
+            gridcolor: gridColor,
+            zerolinecolor: gridColor
+        },
+        yaxis: {
+            title: 'Period Derivative',
+            type: 'log',
+            gridcolor: gridColor,
+            zerolinecolor: gridColor
+        },
+        title: 'P-Ṗ Diagram'
     }
 
-function PPDiagram(){
     return (
         <Plot
         data={[magnetarTrace, mspTrace, pulsarTrace, deathLineTrace]}

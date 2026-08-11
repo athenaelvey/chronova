@@ -9,16 +9,16 @@ function ExplorePage(){
     const [currRow, setRow] = useState(null)
     
     return(
-        <>
+        <div className="explore-container">
             <PPDiagram /> 
+            <DetailPanel currRow={currRow}/>
             <CatalogTable 
                 currClass={currClass} 
                 setClass={setClass} 
                 currRow={currRow} 
                 setRow={setRow} 
             />
-            <DetailPanel currRow={currRow}/>
-        </>
+        </div>
     )
 }
 
