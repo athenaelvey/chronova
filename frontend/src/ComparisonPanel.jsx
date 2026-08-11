@@ -2,6 +2,7 @@ import { useState } from 'react'
 import pulsars from './displaydata/pulsars.json'
 import { characteristicAge, BField } from './util/derivedFields.js';
 import { formatAge, formatBField } from './util/formatters.js';
+import './ComparisonPanel.css';
 
 function ComparisonPanel(){
     const [selectedFirstPulsar, setFirstPulsar] = useState(null)
@@ -20,50 +21,56 @@ function ComparisonPanel(){
     const formattedFieldB = selectedSecondPulsar ? formatBField(fieldB) : null;
 
     return(
-    <div>
-        <select onChange={(event) => {
-        const match = pulsars.find(item => item.PSRJ === event.target.value);
-        setFirstPulsar(match);
-        }}>
-        {pulsars.map(item => (
-            <option key={item.PSRJ} value={item.PSRJ}>
-            {item.PSRJ}
-            </option>
-        ))}
-        </select>
+    <div className="compare-panel">
+        <div className="compare-card">
+            <span className="compare-label">Pulsar A</span>
+            <select className="compare-select" onChange={(event) => {
+            const match = pulsars.find(item => item.PSRJ === event.target.value);
+            setFirstPulsar(match);
+            }}>
+            {pulsars.map(item => (
+                <option key={item.PSRJ} value={item.PSRJ}>
+                {item.PSRJ}
+                </option>
+            ))}
+            </select>
 
-        {selectedFirstPulsar ? (
-        <div>
-            <p>{selectedFirstPulsar.PSRJ}</p>
-            <p>{selectedFirstPulsar.classification}</p>
-            <p>{formattedAge}</p>
-            <p>{formattedField}</p>
+            {selectedFirstPulsar ? (
+            <div className="compare-details">
+                <p className="compare-name">{selectedFirstPulsar.PSRJ}</p>
+                <p>{selectedFirstPulsar.classification}</p>
+                <p>{formattedAge}</p>
+                <p>{formattedField}</p>
+            </div>
+            ) : (
+            <p className="compare-empty">Select a pulsar</p>
+            )}
         </div>
-        ) : (
-        <p>Select another pulsar</p>
-        )}
 
-        <select onChange={(event) => {
-        const match = pulsars.find(item => item.PSRJ === event.target.value);
-        setSecondPulsar(match);
-        }}>
-        {pulsars.map(item => (
-            <option key={item.PSRJ} value={item.PSRJ}>
-            {item.PSRJ}
-            </option>
-        ))}
-        </select>
+        <div className="compare-card">
+            <span className="compare-label">Pulsar B</span>
+            <select className="compare-select" onChange={(event) => {
+            const match = pulsars.find(item => item.PSRJ === event.target.value);
+            setSecondPulsar(match);
+            }}>
+            {pulsars.map(item => (
+                <option key={item.PSRJ} value={item.PSRJ}>
+                {item.PSRJ}
+                </option>
+            ))}
+            </select>
 
-        {selectedSecondPulsar ? (
-        <div>
-            <p>{selectedSecondPulsar.PSRJ}</p>
-            <p>{selectedSecondPulsar.classification}</p>
-            <p>{formattedAgeB}</p>
-            <p>{formattedFieldB}</p>
+            {selectedSecondPulsar ? (
+            <div className="compare-details">
+                <p className="compare-name">{selectedSecondPulsar.PSRJ}</p>
+                <p>{selectedSecondPulsar.classification}</p>
+                <p>{formattedAgeB}</p>
+                <p>{formattedFieldB}</p>
+            </div>
+            ) : (
+            <p className="compare-empty">Select a pulsar</p>
+            )}
         </div>
-        ) : ( <p></p>
-        )}
-
     </div>
     )
 }

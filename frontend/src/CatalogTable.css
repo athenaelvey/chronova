@@ -25,10 +25,11 @@ table {
 th {
   font-family: var(--heading);
   font-weight: 500;
-  color: var(--text-h);
+  color: var(--accent-secondary);
   padding: 0 20px 8px;
-  font-size: 14px;
-  letter-spacing: 0.02em;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   border-bottom: 1px solid var(--border);
 }
 

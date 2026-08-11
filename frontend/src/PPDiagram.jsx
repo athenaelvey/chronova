@@ -27,7 +27,8 @@ const magnetarTrace = {
   y: magnetarArrayP1,
   mode: 'markers',
   type: 'scatter',
-  name: 'Magnetars'
+  name: 'Magnetars',
+  marker: { color: '#c9525f' }
 }
 
 const mspTrace = {
@@ -35,7 +36,8 @@ const mspTrace = {
   y: mspArrayP1,
   mode: 'markers',
   type: 'scatter',
-  name: 'Millisecond Pulsars'
+  name: 'Millisecond Pulsars',
+  marker: { color: '#4dd8e8' }
 }
 
 const pulsarTrace = {
@@ -43,7 +45,8 @@ const pulsarTrace = {
   y: pulsarArrayP1,
   mode: 'markers',
   type: 'scatter',
-  name: 'Ordinary Pulsars'
+  name: 'Ordinary Pulsars',
+  marker: { color: '#d9a940' }
 }
 
 const deathLineTrace = {
@@ -51,7 +54,8 @@ const deathLineTrace = {
   y: [deathLineStart.Pdot, deathLineEnd.Pdot],
   mode: 'lines',
   type: 'scatter',
-  name: 'Death Line'
+  name: 'Death Line',
+  line: { color: '#8a7fa3', dash: 'dash' }
 }
 
 function PPDiagram(){
@@ -65,13 +69,13 @@ function PPDiagram(){
         plot_bgcolor: bg,
         font: { color: textColor },
         xaxis: {
-            title: 'Period (s)',
+            title: { text: 'Period, P (s)', font: { color: textColor } },
             type: 'log',
             gridcolor: gridColor,
             zerolinecolor: gridColor
         },
         yaxis: {
-            title: 'Period Derivative',
+            title: { text: 'Period Derivative, Ṗ', font: { color: textColor } },
             type: 'log',
             gridcolor: gridColor,
             zerolinecolor: gridColor

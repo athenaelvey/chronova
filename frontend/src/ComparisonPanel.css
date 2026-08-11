@@ -1,0 +1,54 @@
+.compare-panel {
+  display: flex;
+  gap: 40px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.compare-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 30px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  min-width: 220px;
+}
+
+.compare-label {
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.compare-select {
+  font-family: var(--sans);
+  font-size: 15px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--accent-border);
+  background: var(--code-bg);
+  color: var(--text-h);
+}
+
+.compare-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: center;
+}
+
+.compare-details .compare-name {
+  color: var(--accent);
+  font-weight: 500;
+  font-size: 17px;
+}
+
+.compare-empty {
+  color: var(--text);
+  font-style: italic;
+  font-size: 14px;
+}

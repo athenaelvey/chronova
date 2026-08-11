@@ -1,0 +1,23 @@
+.detail-empty {
+  color: var(--text);
+  font-style: italic;
+  font-size: 15px;
+  padding: 16px 24px;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  align-self: center;
+  width: fit-content;
+}
+
+.detail-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--text);
+}
+
+.detail-panel .detail-name {
+  color: var(--text-h);
+  font-weight: 500;
+  font-size: 18px;
+}
