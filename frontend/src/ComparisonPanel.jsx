@@ -3,6 +3,8 @@ import pulsars from './displaydata/pulsars.json'
 import { characteristicAge, BField } from './util/derivedFields.js';
 import { formatAge, formatBField } from './util/formatters.js';
 import { getSpinDuration } from './util/spinVisuals.js'
+import PulsarSpinner from './PulsarSpinner.jsx'
+import PulsarSphere from './PulsarSphere.jsx'
 import './ComparisonPanel.css';
 
 function ComparisonPanel(){
@@ -24,8 +26,8 @@ function ComparisonPanel(){
     const p0Min = Math.min(...pulsars.map(item => item.P0));
     const p0Max = Math.max(...pulsars.map(item => item.P0));
 
-    const spinDur1 = selectedFirstPulsar ? getSpinDuration(selectedFirstPulsar) : null;
-    const spinDur2 = selectedSecondPulsar ?getSpinDuration(selectedSecondPulsar) : null;
+    const durationA = selectedFirstPulsar ? getSpinDuration(selectedFirstPulsar.P0, p0Min, p0Max) : null;
+    const durationB = selectedSecondPulsar ? getSpinDuration(selectedSecondPulsar.P0, p0Min, p0Max) : null;
 
     return(
     <div className="compare-panel">
@@ -48,6 +50,8 @@ function ComparisonPanel(){
                 <p>{selectedFirstPulsar.classification}</p>
                 <p>{formattedAge}</p>
                 <p>{formattedField}</p>
+                <PulsarSphere />
+                <PulsarSpinner duration={durationA} />
             </div>
             ) : (
             <p className="compare-empty">Select a pulsar</p>
@@ -73,12 +77,14 @@ function ComparisonPanel(){
                 <p>{selectedSecondPulsar.classification}</p>
                 <p>{formattedAgeB}</p>
                 <p>{formattedFieldB}</p>
+                <PulsarSpinner duration={durationB} />
             </div>
             ) : (
             <p className="compare-empty">Select a pulsar</p>
             )}
         </div>
     </div>
+    
     )
 }
 

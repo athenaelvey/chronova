@@ -1,4 +1,4 @@
-function getSpinDuration(p0, p0Min, p0Max)
+export function getSpinDuration(p0, p0Min, p0Max)
 {
     let normalized;
 
@@ -13,7 +13,7 @@ function getSpinDuration(p0, p0Min, p0Max)
 
     const minDuration = 0.3;
     const maxDuration = 4;
-    const duration;
+    let duration;
 
     
     duration = minDuration + normalized * (maxDuration - minDuration);
