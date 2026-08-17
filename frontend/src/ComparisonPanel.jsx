@@ -2,6 +2,7 @@ import { useState } from 'react'
 import pulsars from './displaydata/pulsars.json'
 import { characteristicAge, BField } from './util/derivedFields.js';
 import { formatAge, formatBField } from './util/formatters.js';
+import { getSpinDuration } from './util/spinVisuals.js'
 import './ComparisonPanel.css';
 
 function ComparisonPanel(){
@@ -19,6 +20,12 @@ function ComparisonPanel(){
 
     const formattedAgeB = selectedSecondPulsar ? formatAge(ageB) : null;
     const formattedFieldB = selectedSecondPulsar ? formatBField(fieldB) : null;
+
+    const p0Min = Math.min(...pulsars.map(item => item.P0));
+    const p0Max = Math.max(...pulsars.map(item => item.P0));
+
+    const spinDur1 = selectedFirstPulsar ? getSpinDuration(selectedFirstPulsar) : null;
+    const spinDur2 = selectedSecondPulsar ?getSpinDuration(selectedSecondPulsar) : null;
 
     return(
     <div className="compare-panel">

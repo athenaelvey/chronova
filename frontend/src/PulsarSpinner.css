@@ -1,0 +1,11 @@
+@keyframes spin{
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+.pulsar-spinner-group{
+    animation-name: spin;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    transform-origin: 50px 50px;
+}
