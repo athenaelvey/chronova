@@ -85,7 +85,7 @@ function ComparisonPanel(){
                         <p>{formattedFieldB}</p>
                     </div>
                     <div className="sphere-card">
-                        <PulsarSphere key={selectedFirstPulsar.PSRJ} duration={durationA} />
+                        <PulsarSphere key={selectedSecondPulsar.PSRJ} duration={durationA} />
                     </div>
                 </>
                 ) : (
