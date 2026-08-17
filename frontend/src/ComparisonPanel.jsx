@@ -45,18 +45,20 @@ function ComparisonPanel(){
                 </select>
 
                 {selectedFirstPulsar ? (
-                <div className="compare-details">
-                    <p className="compare-name">{selectedFirstPulsar.PSRJ}</p>
-                    <p>{selectedFirstPulsar.classification}</p>
-                    <p>{formattedAge}</p>
-                    <p>{formattedField}</p>
-                </div>
+                <>
+                    <div className="compare-details">
+                        <p className="compare-name">{selectedFirstPulsar.PSRJ}</p>
+                        <p>{selectedFirstPulsar.classification}</p>
+                        <p>{formattedAge}</p>
+                        <p>{formattedField}</p>
+                    </div>
+                    <div className="sphere-card">
+                        <PulsarSphere key={selectedFirstPulsar.PSRJ} duration={durationA} />
+                    </div>
+                </>
                 ) : (
                 <p className="compare-empty">Select a pulsar</p>
                 )}
-            </div>
-            <div className="sphere-card">
-                <PulsarSphere />
             </div>
         </div>
 
@@ -75,19 +77,22 @@ function ComparisonPanel(){
                 </select>
 
                 {selectedSecondPulsar ? (
-                <div className="compare-details">
-                    <p className="compare-name">{selectedSecondPulsar.PSRJ}</p>
-                    <p>{selectedSecondPulsar.classification}</p>
-                    <p>{formattedAgeB}</p>
-                    <p>{formattedFieldB}</p>
-                </div>
+                <>
+                    <div className="compare-details">
+                        <p className="compare-name">{selectedSecondPulsar.PSRJ}</p>
+                        <p>{selectedSecondPulsar.classification}</p>
+                        <p>{formattedAgeB}</p>
+                        <p>{formattedFieldB}</p>
+                    </div>
+                    <div className="sphere-card">
+                        <PulsarSphere key={selectedFirstPulsar.PSRJ} duration={durationA} />
+                    </div>
+                </>
                 ) : (
                 <p className="compare-empty">Select a pulsar</p>
                 )}
             </div>
-            <div className="sphere-card">
-                <PulsarSphere />
-            </div>
+            
         </div>
     </div>
     

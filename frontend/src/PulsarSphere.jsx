@@ -1,13 +1,15 @@
 import { useEffect, useRef } from "react";
 import * as THREE from 'three';
 
-function PulsarSphere(){
+function PulsarSphere({ duration }){
 
     const mountRef = useRef(null);
 
     useEffect(() => {
 
         const currentMount = mountRef.current;
+
+        const increment = (2*Math.PI) / (duration*60);
 
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
@@ -35,14 +37,13 @@ function PulsarSphere(){
         let frameID;
 
         function animate(){
-            sphere.rotation.y += 0.01;
-            beam.rotation.y += 0.01;
+            sphere.rotation.y += increment;
+            sphere.rotation.x += 0.005;
+            beam.rotation.y += increment;
             renderer.render(scene, camera);
             frameID = requestAnimationFrame(animate);
         }
         animate();
-
-        renderer.render(scene, camera);
 
         return() =>
         {
