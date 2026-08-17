@@ -3,7 +3,6 @@ import pulsars from './displaydata/pulsars.json'
 import { characteristicAge, BField } from './util/derivedFields.js';
 import { formatAge, formatBField } from './util/formatters.js';
 import { getSpinDuration } from './util/spinVisuals.js'
-import PulsarSpinner from './PulsarSpinner.jsx'
 import PulsarSphere from './PulsarSphere.jsx'
 import './ComparisonPanel.css';
 
@@ -31,57 +30,64 @@ function ComparisonPanel(){
 
     return(
     <div className="compare-panel">
-        <div className="compare-card">
-            <span className="compare-label">Pulsar A</span>
-            <select className="compare-select" onChange={(event) => {
-            const match = pulsars.find(item => item.PSRJ === event.target.value);
-            setFirstPulsar(match);
-            }}>
-            {pulsars.map(item => (
-                <option key={item.PSRJ} value={item.PSRJ}>
-                {item.PSRJ}
-                </option>
-            ))}
-            </select>
+        <div className="compare-column">
+            <div className="compare-card">
+                <span className="compare-label">Pulsar A</span>
+                <select className="compare-select" onChange={(event) => {
+                const match = pulsars.find(item => item.PSRJ === event.target.value);
+                setFirstPulsar(match);
+                }}>
+                {pulsars.map(item => (
+                    <option key={item.PSRJ} value={item.PSRJ}>
+                    {item.PSRJ}
+                    </option>
+                ))}
+                </select>
 
-            {selectedFirstPulsar ? (
-            <div className="compare-details">
-                <p className="compare-name">{selectedFirstPulsar.PSRJ}</p>
-                <p>{selectedFirstPulsar.classification}</p>
-                <p>{formattedAge}</p>
-                <p>{formattedField}</p>
-                <PulsarSphere />
-                <PulsarSpinner duration={durationA} />
+                {selectedFirstPulsar ? (
+                <div className="compare-details">
+                    <p className="compare-name">{selectedFirstPulsar.PSRJ}</p>
+                    <p>{selectedFirstPulsar.classification}</p>
+                    <p>{formattedAge}</p>
+                    <p>{formattedField}</p>
+                </div>
+                ) : (
+                <p className="compare-empty">Select a pulsar</p>
+                )}
             </div>
-            ) : (
-            <p className="compare-empty">Select a pulsar</p>
-            )}
+            <div className="sphere-card">
+                <PulsarSphere />
+            </div>
         </div>
 
-        <div className="compare-card">
-            <span className="compare-label">Pulsar B</span>
-            <select className="compare-select" onChange={(event) => {
-            const match = pulsars.find(item => item.PSRJ === event.target.value);
-            setSecondPulsar(match);
-            }}>
-            {pulsars.map(item => (
-                <option key={item.PSRJ} value={item.PSRJ}>
-                {item.PSRJ}
-                </option>
-            ))}
-            </select>
+        <div className="compare-column">
+            <div className="compare-card">
+                <span className="compare-label">Pulsar B</span>
+                <select className="compare-select" onChange={(event) => {
+                const match = pulsars.find(item => item.PSRJ === event.target.value);
+                setSecondPulsar(match);
+                }}>
+                {pulsars.map(item => (
+                    <option key={item.PSRJ} value={item.PSRJ}>
+                    {item.PSRJ}
+                    </option>
+                ))}
+                </select>
 
-            {selectedSecondPulsar ? (
-            <div className="compare-details">
-                <p className="compare-name">{selectedSecondPulsar.PSRJ}</p>
-                <p>{selectedSecondPulsar.classification}</p>
-                <p>{formattedAgeB}</p>
-                <p>{formattedFieldB}</p>
-                <PulsarSpinner duration={durationB} />
+                {selectedSecondPulsar ? (
+                <div className="compare-details">
+                    <p className="compare-name">{selectedSecondPulsar.PSRJ}</p>
+                    <p>{selectedSecondPulsar.classification}</p>
+                    <p>{formattedAgeB}</p>
+                    <p>{formattedFieldB}</p>
+                </div>
+                ) : (
+                <p className="compare-empty">Select a pulsar</p>
+                )}
             </div>
-            ) : (
-            <p className="compare-empty">Select a pulsar</p>
-            )}
+            <div className="sphere-card">
+                <PulsarSphere />
+            </div>
         </div>
     </div>
     
