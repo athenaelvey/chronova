@@ -33,6 +33,22 @@
 
 }
 
+.comparison-summary{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px 20px;
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  text-align: center;
+}
+
+.comparison-summary p{
+  color: var(--text);
+  font-size: 18px;
+  line-height: 1.4;
+}
+
 .compare-label {
   color: var(--accent);
   font-size: 13px;

@@ -4,6 +4,7 @@ import { characteristicAge, BField } from './util/derivedFields.js';
 import { formatAge, formatBField } from './util/formatters.js';
 import { getSpinDuration } from './util/spinVisuals.js'
 import PulsarSphere from './PulsarSphere.jsx'
+import { comparisonSentences } from './util/comparisonText.js'
 import './ComparisonPanel.css';
 
 function ComparisonPanel(){
@@ -28,7 +29,12 @@ function ComparisonPanel(){
     const durationA = selectedFirstPulsar ? getSpinDuration(selectedFirstPulsar.P0, p0Min, p0Max) : null;
     const durationB = selectedSecondPulsar ? getSpinDuration(selectedSecondPulsar.P0, p0Min, p0Max) : null;
 
+    const genComparisonSentences = (selectedFirstPulsar && selectedSecondPulsar)
+        ? comparisonSentences(selectedFirstPulsar, selectedSecondPulsar, age, ageB, field, fieldB)
+        : [];
+
     return(
+    <>
     <div className="compare-panel">
         <div className="compare-column">
             <div className="compare-card">
@@ -85,17 +91,23 @@ function ComparisonPanel(){
                         <p>{formattedFieldB}</p>
                     </div>
                     <div className="sphere-card">
-                        <PulsarSphere key={selectedSecondPulsar.PSRJ} duration={durationA} />
+                        <PulsarSphere key={selectedSecondPulsar.PSRJ} duration={durationB} />
                     </div>
                 </>
                 ) : (
                 <p className="compare-empty">Select a pulsar</p>
                 )}
             </div>
-            
         </div>
     </div>
-    
+    {genComparisonSentences.length > 0 && (
+    <div className="comparison-summary">
+        {genComparisonSentences.map((sentence, index) => (
+            <p key={index}>{sentence}</p>
+        ))}
+    </div>
+    )}
+    </>
     )
 }
 
