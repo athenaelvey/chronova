@@ -1,0 +1,86 @@
+.query-builder{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    font-family: var(--sans);
+    margin-top: 24px;
+    padding: 20px 24px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--code-bg);
+    width: fit-content;
+    min-width: 480px;
+}
+
+.conditions-list{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+}
+
+.condition-row{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.condition-row select:hover,
+.condition-row input[type="text"]:hover {
+  color: var(--text-h);
+}
+ 
+.condition-row input[type="text"] {
+  flex: 1;
+  min-width: 0;
+}
+ 
+.condition-row button {
+  font-family: var(--sans);
+  font-size: 13px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--accent-secondary);
+  cursor: pointer;
+}
+ 
+.condition-row button:hover {
+  color: var(--text-h);
+  border-color: var(--text-h);
+}
+ 
+.query-builder > button {
+  font-family: var(--heading);
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--accent-secondary);
+  cursor: pointer;
+}
+ 
+.query-builder > button:hover {
+  color: var(--text-h);
+  border-color: var(--text-h);
+}
+ 
+.combinator-toggle {
+  display: flex;
+  gap: 20px;
+  font-size: 13px;
+  color: var(--text);
+}
+ 
+.combinator-toggle label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}

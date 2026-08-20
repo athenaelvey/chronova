@@ -1,6 +1,7 @@
 import ConditionRow from './ConditionRow';
 import { filterableFields } from './util/fieldMeta';
 import { operators } from './util/fieldMeta';
+import './QueryBuilder.css';
 
 function blankCondition(){
     const firstField = filterableFields[0];

@@ -15,18 +15,18 @@ function ExplorePage(){
         <div className="explore-container">
             <PPDiagram /> 
             <DetailPanel currRow={currRow}/>
-            <CatalogTable 
-                conditions={conditions} 
-                combinator={combinator} 
-                currRow = {currRow}
-                setRow = {setRow}
-            />
             <QueryBuilder
                 conditions={conditions} 
                 combinator={combinator} 
                 setConditions={setConditions} 
                 setCombinator={setCombinator} 
             />
+            <CatalogTable 
+                conditions={conditions} 
+                combinator={combinator} 
+                currRow = {currRow}
+                setRow = {setRow}
+            />  
         </div>
     )
 }

@@ -1,18 +1,13 @@
 import pulsars from './displaydata/pulsars.json'
 import './CatalogTable.css'
+import { evaluatePulsar } from './util/queryBuilder';
 
-function CatalogTable({ currClass, setClass, currRow, setRow }){
+function CatalogTable({ conditions, combinator, currRow, setRow }){
 
-    const tableArray = pulsars.filter(item => item.classification === currClass || currClass === "All");
+    const tableArray = pulsars.filter(item => evaluatePulsar(item, conditions, combinator));
 
     return(
         <div className="catalog-container">
-            <select className="catalog-select" onChange={(e) => setClass(e.target.value)}>
-                <option value="All">All</option>
-                <option value="Magnetars">Magnetars</option>
-                <option value="Millisecond Pulsars">Millisecond Pulsars</option>
-                <option value="Ordinary Pulsars">Ordinary Pulsars</option>
-            </select>
             <table>
                 <thead>
                     <tr>
