@@ -1,6 +1,6 @@
 import pulsars from './displaydata/pulsars.json'
 import Plot from 'react-plotly.js'
-import { deathLinePdot } from './util/derivedFields.js';
+import { deathLinePdot } from './util/DerivedFields.js';
 
 
 const magnetarArray = pulsars.filter(item => item.classification === "Magnetars")

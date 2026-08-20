@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import pulsars from './displaydata/pulsars.json'
-import { characteristicAge, BField } from './util/derivedFields.js';
+import { characteristicAge, BField } from './util/DerivedFields.js';
 import { formatAge, formatBField } from './util/formatters.js';
 import { getSpinDuration } from './util/spinVisuals.js'
 import PulsarSphere from './PulsarSphere.jsx'
