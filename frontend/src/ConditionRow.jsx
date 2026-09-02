@@ -9,7 +9,12 @@ function ConditionRow({ condition, onChange, onRemove})
     <div className="condition-row">
       <select
         value={condition.field}
-        onChange={(e) => onChange({ ...condition, field: e.target.value })}
+        onChange={(e) => {
+          const newField = e.target.value;
+          const newFieldMeta = filterableFields.find(f => f.key === newField);
+          const newOperator = operators[newFieldMeta.type][0];
+          onChange({ ...condition, field: newField , operator: newOperator, value: ""});
+        }}
       >
         {filterableFields.map(f => (
           <option key={f.key} value={f.key}>{f.label}</option>
@@ -25,11 +30,23 @@ function ConditionRow({ condition, onChange, onRemove})
         ))}
       </select>
 
+      {fieldMeta.type === "categorical" ? (
+      <select
+        value={condition.value}
+        onChange={(e) => onChange({ ...condition, value: e.target.value })}
+      >
+        <option value="">Select...</option>
+        {fieldMeta.options.map(opt => (
+          <option key={opt} value={opt}>{opt}</option>
+        ))}
+      </select>
+    ) : (
       <input
         type="text"
         value={condition.value}
         onChange={(e) => onChange({ ...condition, value: e.target.value })}
       />
+    )}
 
       <button onClick={onRemove}>Remove</button>
     </div>
