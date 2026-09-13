@@ -11,13 +11,16 @@ from pathlib import Path
 
 PULSARS_JSON_PATH = Path(__file__).parent.parent.parent / "frontend"/ "src" / "displaydata" / "pulsars.json"
 
-def replace_pulsas(pulsars_data):
+def replace_pulsars(pulsars_data):
     session = SessionLocal()
     try:
-
+        session.query(Pulsar).delete()
+        session.execute(Pulsar.__table__.insert(), pulsars_data)
+        session.commit()
+        print(f"Replaced table with {len(pulsars_data)} pulsars.")
     finally:
         session.close()
-        
+
 def upsert_pulsars(pulsars_data):
     session = SessionLocal()
     try:

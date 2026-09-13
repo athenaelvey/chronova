@@ -1,6 +1,6 @@
 from datetime import datetime, timezone
 from psrqpy import QueryATNF
-from load_pulsars import upsert_pulsars
+from load_pulsars import replace_pulsars
 import pandas as pd
 
 def fetch_raw_data():
@@ -62,8 +62,8 @@ def run_pipeline():
     valid_rows, anomaly_log, insufficient_data_count = validate_and_classify(df)
     curated_df = curate_sample(valid_rows, 10)
     pulsars_data = curated_df.to_dict(orient='records')
-    upsert_pulsars(pulsars_data)
-    print(f"Upserted {len(pulsars_data)} pulsars.")
+    replace_pulsars(pulsars_data)
+    print(f"Replaced {len(pulsars_data)} pulsars.")
     print(f"Anomalies discarded: {len(anomaly_log)}")
     print(f"Insufficient data (missing P1): {insufficient_data_count}")
 
