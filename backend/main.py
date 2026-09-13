@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Depends
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from sqlalchemy import and_, or_
 
@@ -8,6 +9,13 @@ from schemas import PulsarOut
 from schemas import Condition, FilterRequest
 
 app = FastAPI()
+
+app.add_middleware(
+        CORSMiddleware,
+        allow_origins=["http://localhost:5173"],
+        allow_methods=["*"],
+        allow_headers=["*"],
+)
 
 @app.get("/pulsars", response_model=list[PulsarOut])
 def get_pulsar(db: Session = Depends(get_db)):

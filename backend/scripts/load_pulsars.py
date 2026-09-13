@@ -11,10 +11,14 @@ from pathlib import Path
 
 PULSARS_JSON_PATH = Path(__file__).parent.parent.parent / "frontend"/ "src" / "displaydata" / "pulsars.json"
 
-def load_pulsars():
-    with open(PULSARS_JSON_PATH, "r") as f:
-        pulsars_data = json.load(f)
+def replace_pulsas(pulsars_data):
+    session = SessionLocal()
+    try:
 
+    finally:
+        session.close()
+        
+def upsert_pulsars(pulsars_data):
     session = SessionLocal()
     try:
         stmt = pg_insert(Pulsar).values(pulsars_data)
@@ -32,6 +36,11 @@ def load_pulsars():
         print(f"Loaded {len(pulsars_data)} pulsars.")
     finally:
         session.close()
+
+def load_pulsars():
+    with open(PULSARS_JSON_PATH, "r") as f:
+        pulsars_data = json.load(f)
+    upsert_pulsars(pulsars_data)
 
 if __name__ == "__main__":
     load_pulsars()
