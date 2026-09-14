@@ -1,0 +1,50 @@
+name: Ingest Pulsar Data Pipeline
+
+# Dormant until Phase 9 (Render deployment):
+#   - The scheduled trigger below is commented out so this workflow never
+#     fires automatically until there's a live production DB to target.
+#   - workflow_dispatch is active now so the workflow is runnable/testable
+#     on demand once DATABASE_URL is wired up as a repo secret.
+#
+# To activate in Phase 9:
+#   1. Add DATABASE_URL as a GitHub Actions repo secret (Render Postgres
+#      connection string).
+#   2. Uncomment the `schedule:` block below.
+#   3. No pipeline logic changes needed — ingest_pipeline.py already reads
+#      DATABASE_URL from the environment.
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run: fetch, validate, and classify only — skip replace_pulsars() (no DB writes)"
+        required: true
+        type: boolean
+        default: true
+  # schedule:
+  #   - cron: '0 3 * * 1'  # Weekly, Mondays 03:00 UTC — uncomment in Phase 9
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r backend/requirements.txt
+
+      - name: Run ingestion pipeline
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        run: |
+          if [ "${{ github.event.inputs.dry_run }}" = "true" ]; then
+            python backend/scripts/ingest_pipeline.py --dry-run
+          else
+            python backend/scripts/ingest_pipeline.py
+          fi
