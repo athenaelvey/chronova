@@ -2,6 +2,7 @@ from datetime import datetime, timezone
 from psrqpy import QueryATNF
 from load_pulsars import replace_pulsars
 import pandas as pd
+import argparse
 
 def fetch_raw_data():
     query = QueryATNF(params=["PSRJ", "P0", "P1", "DIST", "TYPE"])
@@ -57,15 +58,23 @@ def curate_sample(valid_rows, n_per_class=10):
     curated = pd.concat(sampled_groups).reset_index(drop=True)
     return curated
 
-def run_pipeline():
+def run_pipeline(dry_run = False):
     df = fetch_raw_data()
     valid_rows, anomaly_log, insufficient_data_count = validate_and_classify(df)
     curated_df = curate_sample(valid_rows, 10)
     pulsars_data = curated_df.to_dict(orient='records')
-    replace_pulsars(pulsars_data)
-    print(f"Replaced {len(pulsars_data)} pulsars.")
+
+    if dry_run:
+        print(f"[DRY RUN] Would replace {len(pulsars_data)} pulsars (no DB write performed).")
+    else:
+        replace_pulsars(pulsars_data)
+        print(f"Replaced {len(pulsars_data)} pulsars.")
+
     print(f"Anomalies discarded: {len(anomaly_log)}")
     print(f"Insufficient data (missing P1): {insufficient_data_count}")
 
 if __name__ == "__main__":
-    run_pipeline()
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--dry-run", action="store_true", help="Run without writing to the database")
+    args = parser.parse_args()
+    run_pipeline(dry_run=args.dry_run)
