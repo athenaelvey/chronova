@@ -10,3 +10,12 @@ def get_snapshot(run_id):
         return {row.PSRJ: {f: getattr(row, f) for f in DATA_FIELDS} for row in rows}
     finally:
         session.close()
+
+def diff_runs(old_id, new_id):
+    old = get_snapshot(old_id)
+    new = get_snapshot(new_id)
+
+    added = sorted(set(new) - set(old))
+    removed = sorted(set(old) - set(new))
+
+    return {"added": added, "removed": removed}
