@@ -2,6 +2,7 @@ from datetime import datetime, timezone
 from psrqpy import QueryATNF
 from load_pulsars import replace_pulsars
 import pandas as pd
+import hashlib
 import argparse
 
 def fetch_raw_data():
@@ -53,6 +54,7 @@ def curate_sample(valid_rows, n_per_class=10):
 
     sampled_groups = []
     for classification, group in df.groupby('classification'):
+        ranked = group.assign(_key=group['PSRJ'].map(stable_key)).sort_values('_key')
         sampled_groups.append(group.sample(n=min(n_per_class, len(group))))
 
     curated = pd.concat(sampled_groups).reset_index(drop=True)
@@ -67,7 +69,7 @@ def run_pipeline(dry_run = False):
     if dry_run:
         print(f"[DRY RUN] Would replace {len(pulsars_data)} pulsars (no DB write performed).")
     else:
-        replace_pulsars(pulsars_data)
+        replace_pulsars(pulsars_data, len(anomaly_log), insufficient_data_count)
         print(f"Replaced {len(pulsars_data)} pulsars.")
 
     print(f"Anomalies discarded: {len(anomaly_log)}")
