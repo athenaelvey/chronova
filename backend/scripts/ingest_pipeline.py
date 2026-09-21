@@ -46,6 +46,9 @@ def validate_and_classify(df):
 
     return valid_rows, anomaly_log, insufficient_data_count
 
+def stable_key(psrj):
+    return hashlib.md5(psrj.encode()).hexdigest()
+
 def curate_sample(valid_rows, n_per_class=10):
     if not valid_rows:
         return pd.DataFrame()
@@ -55,7 +58,7 @@ def curate_sample(valid_rows, n_per_class=10):
     sampled_groups = []
     for classification, group in df.groupby('classification'):
         ranked = group.assign(_key=group['PSRJ'].map(stable_key)).sort_values('_key')
-        sampled_groups.append(group.sample(n=min(n_per_class, len(group))))
+        sampled_groups.append(ranked.head(n_per_class).drop(columns='_key'))
 
     curated = pd.concat(sampled_groups).reset_index(drop=True)
     return curated
