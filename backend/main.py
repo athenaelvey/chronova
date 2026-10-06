@@ -8,6 +8,8 @@ from models import Pulsar
 from schemas import PulsarOut
 from schemas import Condition, FilterRequest
 
+from pipeline_diff import diff_runs
+
 app = FastAPI()
 
 app.add_middleware(
@@ -49,3 +51,7 @@ def filter_pulsars(request: FilterRequest, db: Session = Depends(get_db)):
         combined = or_(*expressions)
     query = query.filter(combined)
     return query.all()
+
+@app.get("/pipeline/diff")
+def get_pipeline_diff(old_id: int, new_id: int):
+    return diff_runs(old_id, new_id)
