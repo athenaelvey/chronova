@@ -1,14 +1,23 @@
 import math
 from database import SessionLocal 
-from models import PulsarSnapshot
+from models import PulsarSnapshot, PipelineRun
 
 DATA_FIELDS = ["classification", "TYPE", "P0", "P0_ERR", "P1", "P1_ERR", "DIST"]
+COUNT_FIELDS = ["pulsar_count", "anomaly_count", "insufficient_data_count"]
 
 def get_snapshot(run_id):
     session = SessionLocal()
     try:
         rows = session.query(PulsarSnapshot).filter(PulsarSnapshot.run_id == run_id).all()
         return {row.PSRJ: {f: getattr(row, f) for f in DATA_FIELDS} for row in rows}
+    finally:
+        session.close()
+
+def get_run_count(run_id):
+    session = SessionLocal()
+    try:
+        run = session.query(PipelineRun).filter(PipelineRun.id == run_id).one()
+        return {f:getattr(run, f) for f in COUNT_FIELDS}
     finally:
         session.close()
 
@@ -39,4 +48,9 @@ def diff_runs(old_id, new_id):
         if changes:
             changed[psrj] = changes
 
-    return {"added": added, "removed": removed, "changed": changed}
+    return {
+        "added": added,
+        "removed": removed,
+        "changed": changed,
+        "runs": {"old": get_run_count(old_id), "new": get_run_count(new_id)}
+        }
