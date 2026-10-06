@@ -1,7 +1,8 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from sqlalchemy import and_, or_
+from sqlalchemy.exc import NoResultFound
 
 from database import get_db
 from models import Pulsar
@@ -54,4 +55,7 @@ def filter_pulsars(request: FilterRequest, db: Session = Depends(get_db)):
 
 @app.get("/pipeline/diff")
 def get_pipeline_diff(old_id: int, new_id: int):
-    return diff_runs(old_id, new_id)
+    try:
+        return diff_runs(old_id, new_id)
+    except NoResultFound:
+        raise HTTPException(status_code=404, detail="one or both run IDs weren't found")
