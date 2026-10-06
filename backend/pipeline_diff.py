@@ -28,11 +28,16 @@ def same_value(a, b):
     )
     return both_nan or a == b
 
+def clean_value(value):
+    if isinstance(value,float) and math.isnan(value):
+        return None
+    return value
+
 def changed_fields(old_p, new_p):
     changes = {}
     for field in DATA_FIELDS:
         if not same_value(old_p.get(field), new_p.get(field)):
-            changes[field] = {"old": old_p.get(field), "new": new_p.get(field)}
+            changes[field] = {"old": clean_value(old_p.get(field)), "new": clean_value(new_p.get(field))}
     return changes
 
 def diff_runs(old_id, new_id):
