@@ -1,0 +1,91 @@
+.diff-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: var(--sans);
+  color: var(--text);
+  padding: 24px;
+}
+
+.diff-page h1 {
+  font-family: var(--heading);
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+.diff-summary {
+  color: var(--text-h);
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.diff-summary-empty {
+  color: var(--text);
+  font-style: italic;
+  font-size: 15px;
+  padding: 16px 24px;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+}
+
+.run-info {
+  display: flex;
+  gap: 16px;
+  margin: 16px 0 32px;
+}
+
+.run-info div {
+  font-size: 15px;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--code-bg);
+  color: var(--text-h);
+}
+
+.diff-lists {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.diff-lists h2 {
+  font-family: var(--heading);
+  font-weight: 500;
+  color: var(--accent-secondary);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+  text-align: center;
+}
+
+.diff-lists ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.diff-lists li {
+  padding: 6px 0;
+  font-size: 15px;
+  color: var(--text);
+}
+
+.diff-lists li:hover {
+  color: var(--text-h);
+}
+
+@media (max-width: 600px) {
+  .diff-lists {
+    grid-template-columns: 1fr;
+  }
+
+  .run-info {
+    flex-direction: column;
+  }
+}
