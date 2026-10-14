@@ -4,11 +4,13 @@ import LandingPage from './LandingPage'
 import ExplorePage from './ExplorePage'
 import ComparePage from './ComparePage'
 import DiffPage from './DiffPage'
+import StarField from './StarField'
 
 function App() {
 
   return (
     <>
+      <StarField/>
       <nav>
         <Link to="/">Home</Link>
         <Link to="/explore">Explore</Link>
