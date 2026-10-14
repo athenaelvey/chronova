@@ -21,12 +21,19 @@ export default function StarField(){
             y: Math.random() * canvas.height,
             radius: Math.random() * 1.2 + 0.3,
             alpha: Math.random() * 0.5 + 0.5,
+            twinkleSpeed: (Math.random() * 0.01 + 0.002) * (Math.random() < 0.5 ? 1: -1),
         }));
 
         function draw() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             stars.forEach((star) => {
+
+                star.alpha += star.twinkleSpeed;
+                if(star.alpha > 1 || star.alpha < 0.2)
+                {
+                    star.twinkleSpeed *= -1;
+                }
                 ctx.beginPath();
                 ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
                 ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
