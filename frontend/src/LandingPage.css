@@ -28,7 +28,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px dashed var(--border); /* placeholder outline, remove once the sphere is in */
 }
 
 .stat {

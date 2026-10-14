@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "./LandingPage.css";
+import ArmillarySphere from "./ArmillarySphere";
 
 function LandingPage(){
     
@@ -18,7 +19,7 @@ function LandingPage(){
 
             <div className="hero">
                 <p className="hero-left">Explore real pulsar data from the ATNF catalogue.</p>
-                <div className="hero-sphere">Sphere</div>
+                <div className="hero-sphere"><ArmillarySphere /></div>
                 <p className="hero-right">A live pipeline that tracks changes with every update.</p>
             </div>
 
