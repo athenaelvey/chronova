@@ -1,0 +1,47 @@
+.landing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 0 24px;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  align-items: center;
+  gap: 32px;
+  width: 100%;
+  margin-top: 24px;
+}
+
+.hero-left {
+  text-align: right;
+}
+
+.hero-right {
+  text-align: left;
+}
+
+.hero-sphere {
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--border); /* placeholder outline, remove once the sphere is in */
+}
+
+.stat {
+  margin-top: 24px;
+  color: var(--text);
+}
+
+@media (max-width: 1024px) {
+  .hero {
+    grid-template-columns: 1fr;
+  }
+  .hero-left,
+  .hero-right {
+    text-align: center;
+  }
+}
