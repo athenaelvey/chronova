@@ -22,9 +22,9 @@ function ArmillarySphere() {
         // Scene setup (same as PulsarSphere, but with a transparent background)
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
-        camera.position.z = 5;
+        camera.position.z = 4.2;
         const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        renderer.setSize(500, 500);
+        renderer.setSize(560, 560);
         currentMount.appendChild(renderer.domElement);
 
         // Shared gold material
