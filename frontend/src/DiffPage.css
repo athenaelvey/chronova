@@ -2,21 +2,25 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 32px;
+  padding: 0 24px;
+  margin-top: 24px;
   font-family: var(--sans);
   color: var(--text);
-  padding: 24px;
 }
 
 .diff-page h1 {
   font-family: var(--heading);
   font-weight: 500;
   color: var(--text-h);
+  margin: 0;
 }
 
 .diff-summary {
   color: var(--text-h);
   font-weight: 500;
-  font-size: 18px;
+  font-size: 20px;
+  margin: 0;
 }
 
 .diff-summary-empty {
@@ -25,13 +29,12 @@
   font-size: 15px;
   padding: 16px 24px;
   border: 1px dashed var(--border);
-  border-radius: 8px;
+  border-radius: 6px;
 }
 
 .run-info {
   display: flex;
   gap: 16px;
-  margin: 16px 0 32px;
 }
 
 .run-info div {
@@ -46,7 +49,7 @@
 .diff-lists {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 32px;
+  gap: 48px;
   width: 100%;
   max-width: 800px;
 }
@@ -58,6 +61,7 @@
   font-size: 13px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+  margin: 0 0 8px;
   padding-bottom: 8px;
   border-bottom: 1px solid var(--border);
   text-align: center;
@@ -71,7 +75,7 @@
 }
 
 .diff-lists li {
-  padding: 6px 0;
+  padding: 10px 0;
   font-size: 15px;
   color: var(--text);
 }
