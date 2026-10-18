@@ -1,14 +1,41 @@
 import { useState, useEffect } from 'react'
+import { useSearchParams } from 'react-router-dom';
 import './DiffPage.css'
 
+function formatRanAt(runs, id){
+    const run = runs.find(r => r.id === Number(id));
+    if(!run) return "";
+    return new Date(run.ran_at).toLocaleString(undefined, {
+        dateStyle: "medium",
+        timeStyle: "short",
+    });
+}
+
 function DiffPage(){
-    const oldId = 1;
-    const newId = 2;
+    const [searchParams] = useSearchParams();
+    const oldURL = searchParams.get("old_id");
+    const newURL = searchParams.get("new_id");
+    const[runs, setRuns] = useState(null);
     const[loading, setLoading] = useState(true);
     const[diff, setDiff] = useState(null);
     const[error, setError] = useState(null);
 
     useEffect(() => {
+        fetch("http://127.0.0.1:8000/pipeline/runs")
+        .then(response => response.json())
+        .then(data => setRuns(data))
+        .catch(() => {
+            setError("Could not reach the server.");
+            setRuns([]);
+        });
+    }, []);
+
+    const useDefaults = !oldURL || !newURL;
+    const oldId = useDefaults ? runs?.[1]?.id : oldURL;
+    const newId = useDefaults ? runs?.[0]?.id : newURL;
+
+    useEffect(() => {
+        if (!oldId || !newId) return;
         setLoading(true);
         setError(null);
         fetch(`http://127.0.0.1:8000/pipeline/diff?old_id=${oldId}&new_id=${newId}`)
@@ -19,7 +46,7 @@ function DiffPage(){
             }
             else {
                 setDiff(null);
-                setError(data.detail);
+                setError(typeof data.detail === "string" ? data.detail : "Invalid run IDs.");
             }
             setLoading(false);
         })
@@ -29,8 +56,10 @@ function DiffPage(){
         });
     }, [oldId, newId]);
 
-    if (loading) return <div>Loading..</div>;
-    if(error) return<div>{error}</div>;
+    if (error) return <div>{error}</div>;
+    if (runs === null) return <div>Loading..</div>;
+    if (!oldId || !newId) return <div>Need at least two pipeline runs to compare.</div>;
+    if (loading || !diff) return <div>Loading..</div>;
 
     const changedCount = Object.keys(diff.changed).length;
     const noChanges = diff.added.length === 0 &&
@@ -50,11 +79,17 @@ function DiffPage(){
             )}
 
             <div className="run-info">
-                <div>
-                    Run {oldId}: {diff.runs.old.pulsar_count} pulsars, {diff.runs.old.anomaly_count} anomalies
+                <div className="run-col">
+                    <div className="run-box">
+                        Run {oldId}: {diff.runs.old.pulsar_count} pulsars, {diff.runs.old.anomaly_count} anomalies
+                    </div>
+                    <div className="run-box run-date">{formatRanAt(runs, oldId)}</div>
                 </div>
-                <div>
-                    Run {newId}: {diff.runs.new.pulsar_count} pulsars, {diff.runs.new.anomaly_count} anomalies
+                <div className="run-col">
+                    <div className="run-box">
+                        Run {newId}: {diff.runs.new.pulsar_count} pulsars, {diff.runs.new.anomaly_count} anomalies
+                    </div>
+                    <div className="run-box run-date">{formatRanAt(runs, newId)}</div>
                 </div>
             </div>
 
@@ -62,7 +97,7 @@ function DiffPage(){
                 <section>
                     <h2>Added ({diff.added.length})</h2>
                     <ul>
-                        {diff.added.map(name => <li key = {name}>{name}</li>)}
+                        {diff.added.map(name => <li key={name}>{name}</li>)}
                     </ul>
                 </section>
                 <section>

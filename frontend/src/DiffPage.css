@@ -34,16 +34,29 @@
 
 .run-info {
   display: flex;
-  gap: 16px;
+  gap: 24px;
+  align-items: flex-start;
 }
 
-.run-info div {
+.run-col {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.run-box {
   font-size: 15px;
-  padding: 8px 14px;
+  padding: 10px 18px;
   border: 1px solid var(--border);
   border-radius: 6px;
   background: var(--code-bg);
   color: var(--text-h);
+  text-align: center;
+}
+
+.run-date {
+  font-size: 13px;
+  color: var(--text);
 }
 
 .diff-lists {
@@ -52,6 +65,13 @@
   gap: 48px;
   width: 100%;
   max-width: 800px;
+}
+
+.diff-page h1 {
+  font-family: var(--heading);
+  font-weight: 500;
+  color: var(--text-h);
+  margin: 0 0 16px;
 }
 
 .diff-lists h2 {
