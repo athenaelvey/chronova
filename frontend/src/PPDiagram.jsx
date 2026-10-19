@@ -1,5 +1,6 @@
 import pulsars from './displaydata/pulsars.json'
 import Plot from 'react-plotly.js'
+import "./PPDiagram.css";
 import { deathLinePdot } from './util/DerivedFields.js';
 
 
@@ -77,6 +78,7 @@ function PPDiagram(){
         yaxis: {
             title: { text: 'Period Derivative, Ṗ', font: { color: textColor } },
             type: 'log',
+            exponentformat: 'power',
             gridcolor: gridColor,
             zerolinecolor: gridColor
         },
@@ -84,10 +86,22 @@ function PPDiagram(){
     }
 
     return (
+      <div className = "ppdiagram">
         <Plot
         data={[magnetarTrace, mspTrace, pulsarTrace, deathLineTrace]}
-        layout={layout}
+        layout={{ ...layout, autosize: true}}
+        useResizeHandler
+        style={{ width : '100%', height: '450px'}}
+        config={{ responsive: true}}
         />
+        <p clasName="ppdiagram-caption">
+          <strong>Death line</strong> the dashed line marks where rotation-
+          powered pulsars are expected to stop emitting radio waves as they
+          spin down. Magnetars are powered by the decay of their magnetic fields
+          instead, so they aren't expected to follow this boundary, and one sitting
+          below it, like J0418+5732, isn't anomalous
+        </p>
+      </div>
   )
 }
 
