@@ -34,6 +34,7 @@ function QueryBuilder({ conditions, combinator, setConditions, setCombinator})
                 <label>
                     <input
                         type="radio"
+                        name="combinator"
                         checked={combinator === "AND"}
                         onChange={() => setCombinator("AND")}
                     />
@@ -42,6 +43,7 @@ function QueryBuilder({ conditions, combinator, setConditions, setCombinator})
                 <label>
                     <input
                         type="radio"
+                        name="combinator"
                         checked={combinator === "OR"}
                         onChange={() => setCombinator("OR")}
                     />
