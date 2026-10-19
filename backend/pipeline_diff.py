@@ -21,6 +21,21 @@ def get_run_count(run_id):
     finally:
         session.close()
 
+def list_runs():
+    session = SessionLocal()
+    try:
+        runs = session.query(PipelineRun).order_by(PipelineRun.id.desc()).all()
+        return [
+            {
+                "id": run.id,
+                "ran_at": run.ran_at,
+                **{f: getattr(run, f) for f in COUNT_FIELDS},
+            }
+            for run in runs
+        ]
+    finally:
+        session.close()
+
 def same_value(a, b):
     both_nan = (
         isinstance(a, float) and isinstance(b, float)

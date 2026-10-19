@@ -9,7 +9,7 @@ from models import Pulsar
 from schemas import PulsarOut
 from schemas import Condition, FilterRequest
 
-from pipeline_diff import diff_runs
+from pipeline_diff import diff_runs, list_runs
 
 app = FastAPI()
 
@@ -53,9 +53,17 @@ def filter_pulsars(request: FilterRequest, db: Session = Depends(get_db)):
     query = query.filter(combined)
     return query.all()
 
+@app.get("/stats")
+def get_stats(db: Session = Depends(get_db)):
+    return {"pulsar_count": db.query(Pulsar).count()}
+
 @app.get("/pipeline/diff")
 def get_pipeline_diff(old_id: int, new_id: int):
     try:
         return diff_runs(old_id, new_id)
     except NoResultFound:
         raise HTTPException(status_code=404, detail="one or both run IDs weren't found")
+
+@app.get("/pipeline/runs")
+def get_pipeline_runs():
+    return list_runs()

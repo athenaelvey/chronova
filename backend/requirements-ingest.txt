@@ -1,0 +1,3 @@
+-r requirements.txt
+psrqpy==1.3.3
+pandas==3.0.6
