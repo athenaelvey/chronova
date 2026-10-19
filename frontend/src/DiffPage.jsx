@@ -1,3 +1,4 @@
+import { API_BASE } from './api'
 import { useState, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom';
 import './DiffPage.css'
@@ -21,7 +22,7 @@ function DiffPage(){
     const[error, setError] = useState(null);
 
     useEffect(() => {
-        fetch("http://127.0.0.1:8000/pipeline/runs")
+        fetch(`${API_BASE}/pipeline/runs`)
         .then(response => response.json())
         .then(data => setRuns(data))
         .catch(() => {
@@ -38,7 +39,7 @@ function DiffPage(){
         if (!oldId || !newId) return;
         setLoading(true);
         setError(null);
-        fetch(`http://127.0.0.1:8000/pipeline/diff?old_id=${oldId}&new_id=${newId}`)
+        fetch(`${API_BASE}/pipeline/diff?old_id=${oldId}&new_id=${newId}`)
         .then(response => response.json().then(data => ({ ok: response.ok, data})))
         .then(({ ok, data}) => {
             if (ok) {

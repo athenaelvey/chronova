@@ -1,3 +1,4 @@
+import { API_BASE } from './api'
 import { useState, useEffect } from 'react'
 import './CatalogTable.css'
 
@@ -8,7 +9,7 @@ function CatalogTable({ conditions, combinator, currRow, setRow }){
 
     useEffect(() => {
         setLoading(true);
-        fetch('http://127.0.0.1:8000/pulsars/filter',{
+        fetch(`${API_BASE}/pulsars/filter`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify({ conditions, combinator})

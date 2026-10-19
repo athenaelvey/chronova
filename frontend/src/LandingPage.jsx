@@ -1,3 +1,4 @@
+import { API_BASE } from './api'
 import { useState, useEffect } from "react";
 import "./LandingPage.css";
 import ArmillarySphere from "./ArmillarySphere";
@@ -7,7 +8,7 @@ function LandingPage(){
     const [pulsarCount, setPulsarCount] = useState(null);
 
     useEffect(() => {
-        fetch("http://localhost:8000/stats")
+        fetch(`${API_BASE}/stats`)
         .then((res) => res.json())
         .then((data) => setPulsarCount(data.pulsar_count));
     }, []);
