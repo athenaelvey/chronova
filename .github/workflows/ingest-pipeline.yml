@@ -1,18 +1,5 @@
 name: Ingest Pulsar Data Pipeline
 
-# Dormant until Phase 9 (Render deployment):
-#   - The scheduled trigger below is commented out so this workflow never
-#     fires automatically until there's a live production DB to target.
-#   - workflow_dispatch is active now so the workflow is runnable/testable
-#     on demand once DATABASE_URL is wired up as a repo secret.
-#
-# To activate in Phase 9:
-#   1. Add DATABASE_URL as a GitHub Actions repo secret (Render Postgres
-#      connection string).
-#   2. Uncomment the `schedule:` block below.
-#   3. No pipeline logic changes needed — ingest_pipeline.py already reads
-#      DATABASE_URL from the environment.
-
 on:
   workflow_dispatch:
     inputs:
@@ -21,8 +8,8 @@ on:
         required: true
         type: boolean
         default: true
-  # schedule:
-  #   - cron: '0 3 * * 1'  # Weekly, Mondays 03:00 UTC — uncomment in Phase 9
+  schedule:
+    - cron: '0 3 * * 1'  # Weekly, Mondays 03:00 UTC — uncomment in Phase 9
 
 jobs:
   ingest:
