@@ -5,8 +5,6 @@ An interactive full-stack explorer for real pulsar data from the [ATNF Pulsar Ca
 **Live site:** https://chronovapt.vercel.app
 **API docs:** https://chronova-api.onrender.com/docs
 
-> The backend runs on a free Render instance that sleeps when idle, so the first request after a quiet period can take up to a minute.
-
 ## What it does
 
 - **Explore:** build queries over pulsar fields, plot the P-Ṗ diagram with a death line, and inspect individual pulsars in a detail panel
